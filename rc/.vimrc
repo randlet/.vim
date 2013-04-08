@@ -51,7 +51,7 @@ imap <right> <nop>
 imap jk <Esc>
 
 "insert newline by hitting enter
-map <CR> o<Esc>k
+map <C-CR> o<Esc>k
 
 execute pathogen#infect()
 
@@ -71,6 +71,7 @@ if filereadable(expand("~/.vimrc.before"))
   set gcr=a:blinkon0 "Disable cursor blink
   set visualbell "No sounds
   set autoread "Reload files changed outside vim
+  set smartcase
 
   " This makes vim act like all other editors, buffers can
   " exist in the background without being in a window.
@@ -82,6 +83,10 @@ if filereadable(expand("~/.vimrc.before"))
   set background=dark
   colorscheme solarized
 
+  "Cursort Color
+  au InsertLeave * hi Cursor guibg=red
+  au InsertEnter * hi Cursor guibg=green
+  
   " Split vertically on startup
   au VimEnter * vsplit
 
