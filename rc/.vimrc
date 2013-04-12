@@ -43,12 +43,16 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+"imap <C-h> <nop>
+"imap <down> <nop>
+"imap <left> <nop>
+"imap <right> <nop>
 
 imap jk <Esc>
+
+"format paragraph emacs style
+map <A-q> gqap
+imap <A-q> gqap
 
 "insert newline by hitting enter
 map <C-CR> o<Esc>k
@@ -96,27 +100,8 @@ if filereadable(expand("~/.vimrc.before"))
   map <c-l> <c-w>l
   map <c-h> <c-w>h
 
-  au FileType python set omnifunc=pythoncomplete#Complete
-  let g:SuperTabDefaultCompletionType = "context"
-
-  map <leader>j :RopeGotoDefinition<CR>
-  map <leader>r :RopeRename<CR>
-
   "change current working directory when entering a buffer
   autocmd BufEnter * silent! lcd %:p:h
-
-  " Add the virtualenv's site-packages to vim path
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
-
 
   " Change leader to a comma because the backslash is too far away
   " That means all \x commands turn into ,x
@@ -198,3 +183,30 @@ EOF
     set scrolloff=8 "Start scrolling when we're 8 lines away from margins
     set sidescrolloff=15
     set sidescroll=1
+
+
+    "Python -----------------------------------------------------
+    au FileType python set omnifunc=pythoncomplete#Complete
+    let g:SuperTabDefaultCompletionType = "context"
+    let g:flake8_max_line_length=160
+    autocmd BufWritePost *.py call Flake8()
+
+    map <leader>j :RopeGotoDefinition<CR>
+    map <leader>r :RopeRename<CR>
+
+
+   " Add the virtualenv's site-packages to vim path
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+    " =============== Markdown ==========================
+    au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
+    
