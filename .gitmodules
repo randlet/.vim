@@ -43,3 +43,9 @@
 [submodule "bundle/rest"]
 	path = bundle/rest
 	url = https://github.com/vim-scripts/rest.vim.git
+[submodule "bundle/ultisnips"]
+	path = bundle/UltiSnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/vim-flake8"]
+	path = bundle/vim-flake8
+	url = https://github.com/nvie/vim-flake8.git
