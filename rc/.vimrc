@@ -146,8 +146,7 @@ if filereadable(expand("~/.vimrc.before"))
     set tabstop=4
     set expandtab
 
-    filetype plugin on
-    filetype indent on
+    filetype plugin indent on
 
     " Display tabs and trailing spaces visually
     set list listchars=tab:\ \ ,trail:.
@@ -209,4 +208,5 @@ EOF
 
     " =============== Markdown ==========================
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
-    
+    " =============== HTML ============================== 
+    au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
