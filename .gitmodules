@@ -1,9 +1,6 @@
 [submodule "pyflakes-pathogen"]
 	path = pyflakes-pathogen
 	url = https://github.com/mitechie/pyflakes-pathogen.git
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
