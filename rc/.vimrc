@@ -119,7 +119,7 @@ if filereadable(expand("~/.vimrc.before"))
   map <c-h> <c-w>h
 
   "change current working directory when entering a buffer
-  autocmd BufEnter * silent! lcd %:p:h
+  "autocmd BufEnter * silent! lcd %:p:h
 
   " Change leader to a comma because the backslash is too far away
   " That means all \x commands turn into ,x
