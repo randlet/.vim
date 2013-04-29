@@ -81,6 +81,7 @@ if filereadable(expand("~/.vimrc.before"))
   set ruler
   nmap \q :nohlsearch<CR>
 
+  autocmd BufWritePre * :%s/\s\+$//e "strip trailing white space for all files
 
   if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
     set t_Co=256
