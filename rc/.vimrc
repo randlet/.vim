@@ -78,6 +78,7 @@ if filereadable(expand("~/.vimrc.before"))
   set incsearch
   set ignorecase
   set smartcase
+  set ruler
   nmap \q :nohlsearch<CR>
 
 
@@ -119,7 +120,7 @@ if filereadable(expand("~/.vimrc.before"))
   map <c-h> <c-w>h
 
   "change current working directory when entering a buffer
-"autocmd BufEnter * silent! lcd %:p:h
+  "autocmd BufEnter * silent! lcd %:p:h
 
   " Change leader to a comma because the backslash is too far away
   " That means all \x commands turn into ,x
@@ -206,6 +207,7 @@ if filereadable(expand("~/.vimrc.before"))
     au FileType python set omnifunc=pythoncomplete#Complete
     let g:SuperTabDefaultCompletionType = "context"
     let g:flake8_max_line_length=160
+    let g:flake8_ignore="E126, E226"
     autocmd BufWritePost *.py call Flake8()
 
     map <leader>j :RopeGotoDefinition<CR>
@@ -228,7 +230,3 @@ EOF
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
     " =============== HTML ============================== 
     au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
-
-""UltiSnips
-let g:UltiSnipsDontReverseSearchPath="1"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets"]
