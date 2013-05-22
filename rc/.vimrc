@@ -158,15 +158,17 @@ if filereadable(expand("~/.vimrc.before"))
 
     " ================ Indentation ======================
 
+    filetype plugin indent on
     set autoindent
-    set smartindent
+    set cindent
     set smarttab
     set shiftwidth=4
+    set shiftround
     set softtabstop=4
     set tabstop=4
     set expandtab
-
-    filetype plugin indent on
+    set smarttab
+    set cinoptions+=(s
 
     " Display tabs and trailing spaces visually
     set list listchars=tab:\ \ ,trail:.
