@@ -26,8 +26,8 @@ if has("win16") || has("win32") || has("win64")
   " when on windows machines
   let &rtp=substitute(&rtp,"[/]","\\","g")
 
-  "On windows, if called from cygwin or msys, the shell needs to be changed 
-  "to cmd.exe to work with certain plugins that expect cmd.exe on windows versions   
+  "On windows, if called from cygwin or msys, the shell needs to be changed
+  "to cmd.exe to work with certain plugins that expect cmd.exe on windows versions
   "of vim.
   if &shell=~#'bash$'
     set shell=$COMSPEC " sets shell to correct path for cmd.exe
@@ -110,7 +110,7 @@ if filereadable(expand("~/.vimrc.before"))
   "Cursort Color
   au InsertLeave * hi Cursor guibg=red
   au InsertEnter * hi Cursor guibg=green
-  
+
   " Split vertically on startup
   au VimEnter * vsplit
 
@@ -209,8 +209,9 @@ if filereadable(expand("~/.vimrc.before"))
     let g:SuperTabDefaultCompletionType = "context"
     let g:flake8_max_line_length=160
     let g:flake8_ignore="E126, E226"
-    autocmd BufWritePost *.py call Flake8()
+    "autocmd BufWritePost *.py call Flake8()
 
+    let g:jedi#use_tabs_not_buffers = 0
     map <leader>j :RopeGotoDefinition<CR>
     map <leader>r :RopeRename<CR>
 
@@ -223,11 +224,14 @@ import vim
 if 'VIRTUAL_ENV' in os.environ:
     project_base_dir = os.environ['VIRTUAL_ENV']
     sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    if sys.platform.startswith("win"):
+        activate_this = os.path.join(project_base_dir, 'Scripts/activate_this.py')
+    else:
+        activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
 
     " =============== Markdown ==========================
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
-    " =============== HTML ============================== 
+    " =============== HTML ==============================
     au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim

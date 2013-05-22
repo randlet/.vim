@@ -1,3 +1,22 @@
 snippet ipdb "IPython Debugger" !b
 import ipdb; ipdb.set_trace()
 endsnippet
+
+snippet cls "Python Class" !b
+
+
+#============================================================================
+class $1($2):
+    """$3"""
+    $4
+endsnippet
+
+
+
+snippet de "function with docstrings" b
+#---------------------------------------------------------------
+def ${1:function}(`!p
+if snip.indent:
+   snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	"""${4}"""
+endsnippet
