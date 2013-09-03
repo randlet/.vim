@@ -208,6 +208,7 @@ if filereadable(expand("~/.vimrc.before"))
     let g:SuperTabDefaultCompletionType = "context"
     let g:flake8_max_line_length=160
     let g:flake8_ignore="E126, E226"
+    inoremap # X#
     autocmd BufWritePost *.py call Flake8()
 
     map <leader>j :RopeGotoDefinition<CR>
