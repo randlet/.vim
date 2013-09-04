@@ -11,6 +11,7 @@ let g:my_vim_dir=expand("$HOME/.vim")
 if has("win16") || has("win32") || has("win64")
   "add g:my_vim_dir to the front of the runtimepath
    execute "set rtp^=".g:my_vim_dir
+   silent! set guifont=Source_Code_Pro:h11:cANSI
   "add g:my_vim_dir\after to the end of the runtimepath
   execute "set rtp+=".g:my_vim_dir."\\after"
   "Note, pathogen#infect() looks for the 'bundle' folder in each path
