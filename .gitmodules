@@ -34,3 +34,6 @@
 [submodule "bundle/wombat"]
 	path = bundle/wombat
 	url = https://github.com/cschlueter/vim-wombat.git
+[submodule "bundle/csv.vim"]
+	path = bundle/csv.vim
+	url = https://github.com/vim-scripts/csv.vim.git
