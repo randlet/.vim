@@ -102,6 +102,8 @@ if filereadable(expand("~/.vimrc.before"))
   "turn on syntax highlighting
   syntax on
   set background=dark
+
+  let g:solarized_termcolors=256
   colorscheme solarized
 
   "Cursort Color
