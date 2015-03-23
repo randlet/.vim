@@ -40,3 +40,6 @@
 [submodule "bundle/csv.vim"]
 	path = bundle/csv.vim
 	url = https://github.com/vim-scripts/csv.vim.git
+[submodule "bundle/clang_complete"]
+	path = bundle/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete.git

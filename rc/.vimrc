@@ -35,10 +35,6 @@ if has("win16") || has("win32") || has("win64")
   endif
 endif
 
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-
 " disable arrow keys
 map <up> <nop>
 map <down> <nop>
@@ -84,7 +80,7 @@ if filereadable(expand("~/.vimrc.before"))
 
   autocmd BufWritePre * :%s/\s\+$//e "strip trailing white space for all files
 
-  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  if $TERM == "xterm-color" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
     set t_Co=256
   endif
 
@@ -93,7 +89,7 @@ if filereadable(expand("~/.vimrc.before"))
   :let g:ctrlp_map = '<Leader>t'
   ":let g:ctrlp_match_window_bottom = 0
   :let g:ctrlp_match_window_reversed = 0
-  :let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+  :let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
   :let g:ctrlp_working_path_mode = 0
   :let g:ctrlp_dotfiles = 0
   :let g:ctrlp_switch_buffer = 0
@@ -112,8 +108,6 @@ if filereadable(expand("~/.vimrc.before"))
   au InsertLeave * hi Cursor guibg=red
   au InsertEnter * hi Cursor guibg=green
 
-  " Split vertically on startup
-  au VimEnter * vsplit
 
   " Window navigation
   map <c-j> <c-w>j
@@ -238,3 +232,5 @@ EOF
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
     " =============== HTML ==============================
     au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+
+    au BufNewFile,BufRead *.mortran,*.macros setf syntax=fortran
