@@ -235,4 +235,4 @@ EOF
     " =============== HTML ==============================
     au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
 
-    au BufNewFile,BufRead *.mortran,*.macros setf syntax=fortran
+    au BufNewFile,BufRead *.mortran,*.macros setf fortran
