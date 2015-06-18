@@ -76,6 +76,10 @@ if filereadable(expand("~/.vimrc.before"))
   set ignorecase
   set smartcase
   set ruler
+
+  set guioptions-=T  "disable toolbar
+  set laststatus=2
+
   nmap \q :nohlsearch<CR>
 
   autocmd BufWritePre * :%s/\s\+$//e "strip trailing white space for all files
@@ -194,7 +198,10 @@ if filereadable(expand("~/.vimrc.before"))
     set wildignore+=tmp/**
     set wildignore+=*.png,*.jpg,*.gif
 
-    "
+    " ================== Diff ===========================
+    if &diff
+        set diffopt+=iwhite
+    endif
 
     " ================ Scrolling ========================
 
@@ -233,6 +240,7 @@ EOF
     " =============== Markdown ==========================
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
     " =============== HTML ==============================
-    au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+    "au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+    au BufNewFile,BufRead *.html set filetype=htmldjango
 
     au BufNewFile,BufRead *.mortran,*.macros setf fortran
