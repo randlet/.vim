@@ -213,9 +213,7 @@ if filereadable(expand("~/.vimrc.before"))
     "Python -----------------------------------------------------
     au FileType python set omnifunc=pythoncomplete#Complete
     let g:SuperTabDefaultCompletionType = "context"
-    let g:flake8_max_line_length=160
-    let g:flake8_ignore="E126, E226"
-    "autocmd BufWritePost *.py call Flake8()
+    autocmd BufWritePost *.py call Flake8()
 
     let g:jedi#use_tabs_not_buffers = 0
     map <leader>j :RopeGotoDefinition<CR>
@@ -244,3 +242,16 @@ EOF
     au BufNewFile,BufRead *.html set filetype=htmldjango
 
     au BufNewFile,BufRead *.mortran,*.macros setf fortran
+
+
+" Syntastic config
+"let g:syntastic_javascript_checkers = ['jshint']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_loc_list_height=2
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
