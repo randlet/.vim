@@ -211,7 +211,7 @@ if filereadable(expand("~/.vimrc.before"))
 
 
     "Python -----------------------------------------------------
-    au FileType python set omnifunc=pythoncomplete#Complete
+    "au FileType python set omnifunc=pythoncomplete#Complete
     let g:SuperTabDefaultCompletionType = "context"
     autocmd BufWritePost *.py call Flake8()
 
@@ -246,9 +246,9 @@ EOF
 
 " Syntastic config
 "let g:syntastic_javascript_checkers = ['jshint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_loc_list_height=2
 let g:syntastic_always_populate_loc_list = 1
