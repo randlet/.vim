@@ -35,10 +35,6 @@ if has("win16") || has("win32") || has("win64")
   endif
 endif
 
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-
 " disable arrow keys
 map <up> <nop>
 map <down> <nop>
@@ -80,11 +76,15 @@ if filereadable(expand("~/.vimrc.before"))
   set ignorecase
   set smartcase
   set ruler
+
+  set guioptions-=T  "disable toolbar
+  set laststatus=2
+
   nmap \q :nohlsearch<CR>
 
   autocmd BufWritePre * :%s/\s\+$//e "strip trailing white space for all files
 
-  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  if $TERM == "xterm-color" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
     set t_Co=256
   endif
 
@@ -93,7 +93,7 @@ if filereadable(expand("~/.vimrc.before"))
   :let g:ctrlp_map = '<Leader>t'
   ":let g:ctrlp_match_window_bottom = 0
   :let g:ctrlp_match_window_reversed = 0
-  :let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+  :let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
   :let g:ctrlp_working_path_mode = 0
   :let g:ctrlp_dotfiles = 0
   :let g:ctrlp_switch_buffer = 0
@@ -106,14 +106,14 @@ if filereadable(expand("~/.vimrc.before"))
   "turn on syntax highlighting
   syntax on
   set background=dark
+
+  let g:solarized_termcolors=256
   colorscheme solarized
 
   "Cursort Color
   au InsertLeave * hi Cursor guibg=red
   au InsertEnter * hi Cursor guibg=green
 
-  " Split vertically on startup
-  au VimEnter * vsplit
 
   " Window navigation
   map <c-j> <c-w>j
@@ -198,7 +198,10 @@ if filereadable(expand("~/.vimrc.before"))
     set wildignore+=tmp/**
     set wildignore+=*.png,*.jpg,*.gif
 
-    "
+    " ================== Diff ===========================
+    if &diff
+        set diffopt+=iwhite
+    endif
 
     " ================ Scrolling ========================
 
@@ -208,11 +211,9 @@ if filereadable(expand("~/.vimrc.before"))
 
 
     "Python -----------------------------------------------------
-    au FileType python set omnifunc=pythoncomplete#Complete
+    "au FileType python set omnifunc=pythoncomplete#Complete
     let g:SuperTabDefaultCompletionType = "context"
-    let g:flake8_max_line_length=160
-    let g:flake8_ignore="E126, E226"
-    "autocmd BufWritePost *.py call Flake8()
+    autocmd BufWritePost *.py call Flake8()
 
     let g:jedi#use_tabs_not_buffers = 0
     map <leader>j :RopeGotoDefinition<CR>
@@ -237,4 +238,20 @@ EOF
     " =============== Markdown ==========================
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
     " =============== HTML ==============================
-    au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+    "au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+    au BufNewFile,BufRead *.html set filetype=htmldjango
+
+    au BufNewFile,BufRead *.mortran,*.macros setf fortran
+
+
+" Syntastic config
+"let g:syntastic_javascript_checkers = ['jshint']
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_loc_list_height=2
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
