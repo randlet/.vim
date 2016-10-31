@@ -235,14 +235,15 @@ if 'VIRTUAL_ENV' in os.environ:
     execfile(activate_this, dict(__file__=activate_this))
 EOF
 
-    " =============== Markdown ==========================
-    au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
-    " =============== HTML ==============================
-    "au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
-    au BufNewFile,BufRead *.html set filetype=htmldjango
+" =============== Markdown ==========================
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
+" =============== HTML ==============================
+"au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+au BufNewFile,BufRead *.html set filetype=htmldjango
 
-    au BufNewFile,BufRead *.mortran,*.macros setf fortran
+au BufNewFile,BufRead *.mortran,*.macros setf fortran
 
+autocmd BufNewFile,BufRead, *playbooks/*yml set syntax=ansible
 
 " Syntastic config
 "let g:syntastic_javascript_checkers = ['jshint']
