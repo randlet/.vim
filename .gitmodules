@@ -37,9 +37,6 @@
 [submodule "bundle/jedi-vim"]
 	path = bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
-[submodule "bundle/csv.vim"]
-	path = bundle/csv.vim
-	url = https://github.com/vim-scripts/csv.vim.git
 [submodule "bundle/clang_complete"]
 	path = bundle/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
@@ -55,3 +52,6 @@
 [submodule "bundle/vim-unimpaired"]
 	path = bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "bundle/vim-preserve"]
+	path = bundle/vim-preserve
+	url = git@github.com:jwhitley/vim-preserve.git

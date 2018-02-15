@@ -1,9 +1,5 @@
 snippet ipdb "Set ipdb breakpoint" b
-import ipdb; ipdb.set_trace()
-endsnippet
-
-snippet tpdb "Django Template Debugger" !b
-{% load debug %} {% pdb %}
+import ipdb; ipdb.set_trace()  # yapf: disable  # noqa
 endsnippet
 
 snippet cls "Python Class" !b
@@ -23,4 +19,33 @@ def ${1:function}(`!p
 if snip.indent:
    snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
 	"""${4}"""
+endsnippet
+
+snippet dbq "Connection Count Start" b
+from django.db import connection, reset_queries; reset_queries()
+endsnippet
+
+snippet dbqp "Print Connection Count" b
+from django.db import connection; print connection.queries[-10:]; print len(connection.queries)
+endsnippet
+
+
+snippet django_script "Create a standalone Django Script"
+import os
+import sys
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+proj_path = os.path.join(os.path.abspath(os.path.dirname(__file__)))
+sys.path.insert(0, proj_path)
+os.chdir(proj_path)
+get_wsgi_application()
+
+
+def main():
+	pass
+
+
+if __name__ == "__main__":
+	main()
 endsnippet

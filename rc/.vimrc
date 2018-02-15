@@ -2,6 +2,7 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+set encoding=utf-8
 
 "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
@@ -46,6 +47,7 @@ map <right> <nop>
 "imap <right> <nop>
 
 imap jk <Esc>
+cnoremap jk <Esc>
 
 "format paragraph emacs style
 map <A-q> gqap
@@ -82,7 +84,14 @@ if filereadable(expand("~/.vimrc.before"))
 
   nmap \q :nohlsearch<CR>
 
-  autocmd BufWritePre * :%s/\s\+$//e "strip trailing white space for all files
+  fun! StripTrailingWhitespace()
+      " Only strip if the b:noStripWhitespace variable isn't set
+      if exists('b:noStripWhitespace')
+          return
+      endif
+      %s/\s\+$//e
+  endfun
+  autocmd BufWritePre * call StripTrailingWhitespace()
 
   if $TERM == "xterm-color" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
     set t_Co=256
@@ -176,6 +185,7 @@ if filereadable(expand("~/.vimrc.before"))
 
     set nowrap "Don't wrap lines
     set linebreak "Wrap lines at convenient points
+    set colorcolumn=120
 
     " ================ Folds ============================
 
@@ -214,6 +224,8 @@ if filereadable(expand("~/.vimrc.before"))
     "au FileType python set omnifunc=pythoncomplete#Complete
     let g:SuperTabDefaultCompletionType = "context"
     autocmd BufWritePost *.py call Flake8()
+    autocmd BufWritePre *.py call yapf#YAPF()
+    autocmd BufWritePre *.py :Isort
 
     let g:jedi#use_tabs_not_buffers = 0
     map <leader>j :RopeGotoDefinition<CR>
@@ -236,10 +248,18 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
     " =============== Markdown ==========================
+
     au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
+    au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  let b:noStripWhitespace=1
+
     " =============== HTML ==============================
     "au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
-    au BufNewFile,BufRead *.html set filetype=htmldjango
+
+    autocmd FileType css setlocal shiftwidth=2 tabstop=2
+    autocmd FileType yml setlocal shiftwidth=2 tabstop=2
+    autocmd FileType html setlocal shiftwidth=2 tabstop=2
+    autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
+    au BufNewFile,BufRead *.html,*.inc set filetype=htmldjango
 
     au BufNewFile,BufRead *.mortran,*.macros setf fortran
 
@@ -249,8 +269,9 @@ EOF
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-
-let g:syntastic_loc_list_height=2
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_loc_list_height=4
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
