@@ -247,22 +247,23 @@ if 'VIRTUAL_ENV' in os.environ:
     execfile(activate_this, dict(__file__=activate_this))
 EOF
 
-    " =============== Markdown ==========================
+" =============== Markdown ==========================
 
-    au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
-    au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  let b:noStripWhitespace=1
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  let b:noStripWhitespace=1
 
-    " =============== HTML ==============================
-    "au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
+" =============== HTML ==============================
+"au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
 
-    autocmd FileType css setlocal shiftwidth=2 tabstop=2
-    autocmd FileType yml setlocal shiftwidth=2 tabstop=2
-    autocmd FileType html setlocal shiftwidth=2 tabstop=2
-    autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
-    au BufNewFile,BufRead *.html,*.inc set filetype=htmldjango
+autocmd FileType css setlocal shiftwidth=2 tabstop=2
+autocmd FileType yml setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
+au BufNewFile,BufRead *.html,*.inc set filetype=htmldjango
 
-    au BufNewFile,BufRead *.mortran,*.macros setf fortran
+au BufNewFile,BufRead *.mortran,*.macros setf fortran
 
+autocmd BufNewFile,BufRead, *playbooks/*yml set syntax=ansible
 
 " Syntastic config
 "let g:syntastic_javascript_checkers = ['jshint']
