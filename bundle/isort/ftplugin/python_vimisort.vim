@@ -70,7 +70,10 @@ def isort(text_range):
     new_text = SortImports(file_contents=old_text).output
 
     if using_bytes:
-        new_text = new_text.encode('utf-8')
+        try:
+            new_text = new_text.encode('utf-8')
+        except:
+            pass
 
     new_lines = new_text.split('\n')
 
