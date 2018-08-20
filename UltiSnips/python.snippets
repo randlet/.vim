@@ -33,9 +33,23 @@ from django.db import connection, reset_queries; reset_queries()
 endsnippet
 
 snippet dbqp "Print Connection Count" b
-from django.db import connection; print connection.queries[-10:]; print len(connection.queries)
+from django.db import connection; print(connection.queries[-10:]); print(len(connection.queries))
 endsnippet
 
+snippet lq "Print Last Query" b
+from django.db import connection; print(connection.queries[-1]);
+endsnippet
+
+snippet maxq "Print max time query" b
+from django.db import connection
+maxq = 0
+max_query = ""
+for q in connection.queries:
+	if float(q['time']) > maxq:
+		max_query = q['sql']
+		maxq = float(q['time'])
+print(maxq, max_query)
+endsnippet
 
 snippet django_script "Create a standalone Django Script"
 import os

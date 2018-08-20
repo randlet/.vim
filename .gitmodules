@@ -55,3 +55,6 @@
 [submodule "bundle/vim-preserve"]
 	path = bundle/vim-preserve
 	url = git@github.com:jwhitley/vim-preserve.git
+[submodule "bundle/vim-sqlfmt"]
+	path = bundle/vim-sqlfmt
+	url = git@github.com:mattn/vim-sqlfmt.git
