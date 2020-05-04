@@ -58,3 +58,6 @@
 [submodule "bundle/vim-sqlfmt"]
 	path = bundle/vim-sqlfmt
 	url = git@github.com:mattn/vim-sqlfmt.git
+[submodule "bundle/unicode.vim"]
+	path = bundle/unicode.vim
+	url = https://github.com/chrisbra/unicode.vim

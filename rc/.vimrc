@@ -252,6 +252,9 @@ EOF
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  let b:noStripWhitespace=1
 
+" =============== Restructured Text (rst) / Sphinx ===================
+autocmd FileType rst setlocal wrap
+
 " =============== HTML ==============================
 "au BufRead *.html,<&faf;HTML>  runtime! syntax/html.vim
 
